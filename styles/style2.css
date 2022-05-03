@@ -1,0 +1,36 @@
+.btn-c{
+    background-color:#FCC7BF;
+    border: none;
+  }
+  
+  .btn-c:hover{
+    opacity: 0.5;
+    background-color:#FCC7BF;
+  }
+
+  .btn-c-c{
+    background-color:black;
+    border-color: #FCC7BF;
+  }
+
+  .btn-c-c:hover{
+    background-color:#FCC7BF;
+  }
+
+  .bgg{
+      background: url("../images/BG.jpg") no-repeat center center/cover;
+      background-position: center center;
+      
+  }
+
+  body{
+    background: #FCC7BF;
+    background: linear-gradient(to right,#FCC7BF ,#FCC7BF)
+  }
+
+  .bggg{
+    background: url("../images/BG2.jpg") no-repeat center center/cover;
+    background-position: center center;
+    
+}
+  
