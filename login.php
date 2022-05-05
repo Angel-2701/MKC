@@ -2,7 +2,8 @@
 
 //Include Configuration File Google API
 include('loging/config.php');
-
+require_once 'loginfb/config.php';
+session_start();
 $login_button = '';
 
 if (isset($_GET["code"])) {
@@ -24,7 +25,7 @@ if (isset($_GET["code"])) {
         }
 
         if (!empty($data['email'])) {
-            $_SESSION['user_email_address'] = $data['email'];
+            $_SESSION['user_id'] = $data['email'];
         }
 
         if (!empty($data['gender'])) {
@@ -61,13 +62,13 @@ include 'connection.php';
 if (!empty($_POST['email']) && (!empty($_POST['password']))) {
     $objConne = new connection();
     $emaill = $_POST['email'];
-    $result = $objConne->consult("SELECT id,email,password FROM `users` WHERE email = '$emaill'");
+    $result = $objConne->consult("SELECT id,nombre,email,password FROM `users` WHERE email = '$emaill'");
     if (($result) == '') {
         echo ("USER INCORRECT");
         header("location: login.php");
     }
     if (count($result) > 0 && (password_verify($_POST['password'], $result['password']))) {
-
+        $_SESSION['user_name'] = $result['nombre'];
         $_SESSION['user_id'] = $result['id'];
         $_SESSION['email'] = $result['email'];
         header("location: index.php");
@@ -76,7 +77,6 @@ if (!empty($_POST['email']) && (!empty($_POST['password']))) {
         header("location: login.php");
     }
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -171,3 +171,6 @@ if (!empty($_POST['email']) && (!empty($_POST['password']))) {
 </body>
 
 </html>
+
+
+

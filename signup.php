@@ -3,18 +3,21 @@
 <?php
 //Getting the form data (POST METHOD)
 if ($_POST) {
+    $name = $_POST['name'];
     $email = $_POST['email'];
     //Encrypt the password
-    $password = password_hash ($_POST['password'],PASSWORD_BCRYPT);
+    $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
     $objConn = new connection();
-    $sql = "INSERT INTO users (email,password) VALUES ('$email','$password')";
+    $sql = "INSERT INTO `users`(nombre,email,password) VALUES ('$name','$email','$password')";
     $objConn->ejec($sql);
+    
 }
 ?>
 
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -43,6 +46,10 @@ if ($_POST) {
                 <h2 class="fw-bold text-center text-light py-5">Welcome</h2>
                 <!--LOGIN-->
                 <form action="signup.php" method="post">
+                    <div class="mb-4">
+                        <label for="name" class="form-label text-light">Name</label>
+                        <input type="text" class="form-control text-black" name="name">
+                    </div>
                     <div class="mb-4">
                         <label for="email" class="form-label text-light">Email</label>
                         <input type="text" class="form-control text-black" name="email">
@@ -73,4 +80,5 @@ if ($_POST) {
         <script src="bootstrap.bundle.min.js"></script>
         <script src="app/main.js"></script>
 </body>
+
 </html>

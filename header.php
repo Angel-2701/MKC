@@ -1,6 +1,11 @@
 <?php
 session_start();
-$user = $_SESSION['user_id'];
+
+if (isset($_GET["code"])) {
+    $google_service = new Google_Service_Oauth2($google_client); 
+    $_SESSION['user_name']=$google_service->userinfo->get()['given_name'];
+}
+$user = $_SESSION['user_name'];
 ?>
 
 
@@ -20,7 +25,7 @@ $user = $_SESSION['user_id'];
         <li><i class="fa fa-shopping-bag"></i></li>
     </ul>
     <ul class="login">
-        <?php echo ($_SESSION) ? "<a style = 'color:#FCC7BF;'href='login.php'>$user</a> <a style = 'color:#FCC7BF;'href='close.php'>Close</a>" : "<a class='fa fa-user' href='login.php'></a>"; ?>
+        <?php echo ($_SESSION) ? "<a style = 'color:#FCC7BF;'href='#'>$user</a> <a style = 'color:#FCC7BF;'href='close.php'>Close</a>" : "<a class='fa fa-user' href='login.php'></a>"; ?>
     </ul>
 </nav>
 
