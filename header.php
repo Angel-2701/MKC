@@ -2,8 +2,8 @@
 session_start();
 
 if (isset($_GET["code"])) {
-    $google_service = new Google_Service_Oauth2($google_client); 
-    $_SESSION['user_name']=$google_service->userinfo->get()['given_name'];
+    $google_service = new Google_Service_Oauth2($google_client);
+    $_SESSION['user_name'] = $google_service->userinfo->get()['given_name'];
 }
 $user = $_SESSION['user_name'];
 ?>
@@ -11,22 +11,29 @@ $user = $_SESSION['user_name'];
 
 <nav class="nav-main">
 
-    <div class="menu-btn">
-        <i class="fas fa-bars fa-2x"></i>
-    </div>
+
     <ul class="nav-left">
-        <li class="searcher"><i class="fas fa-search fa-2x"></i> <input class="text-input" type="text" placeholder="Search"></li>
+        <div class="menu-btn">
+            <i class="fas fa-bars fa-2x"></i>
+        </div>
+        <li class="searcher"><i class="fas fa-search fa-2x"></i> <input id = "main-searcher" class="text-input" type="text" size="15" placeholder="Search"></li>
     </ul>
     <ul class="nav-center">
         <li><a href="index.php"><img loading="lazy" class="logo" src="images/logo.png" alt="company logo"></a>
         </li>
-    </ul>
+</ul>
     <ul class="nav-right">
-        <li><i class="fa fa-shopping-bag"></i></li>
-    </ul>
-    <ul class="login">
+        <a class="btn-carrito" href="#">
+            <li><i class="fa fa-shopping-bag"></i></li>
+        </a>
+        <ul class="login">
         <?php echo ($_SESSION) ? "<a style = 'color:#FCC7BF;'href='#'>$user</a> <a style = 'color:#FCC7BF;'href='close.php'>Close</a>" : "<a class='fa fa-user' href='login.php'></a>"; ?>
     </ul>
+        
+        
+    </ul>
+    
+    
 </nav>
 
 <div class="nav-sec">
@@ -76,6 +83,16 @@ $user = $_SESSION['user_name'];
             </div>
         </li>
 
+    </ul>
+    <ul>
+        <li class="carrito">
+            <!--<a href="#" class='btn-carrito'>Carrito</a>-->
+            <div id="carrito-container">
+                <div id="tabla">
+
+                </div>
+            </div>
+        </li>
     </ul>
     <script>
         document.querySelector(".menu-btn").addEventListener("click", () => {

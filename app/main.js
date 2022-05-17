@@ -7,7 +7,7 @@
     color = (color == "black")? "#FCC7BF" : "black";
     blink.style.color = color;
   }*/
-
+  const slider = document.querySelector(".slider");
   let sliderSection = document.querySelectorAll(".slider-section");
   let sliderSectionLast = sliderSection[sliderSection.length-1];
   
@@ -70,6 +70,9 @@
         /*ScrollReveal().reveal('.news-cards', { delay: 500 });
         ScrollReveal().reveal('.cards-banner-one', { delay: 500 });
         ScrollReveal().reveal('.cards-banner-two', { delay: 500 });*/
+
+
+        
         
   
       

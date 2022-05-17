@@ -33,7 +33,9 @@ if (isset($_GET["code"])) {
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
     <!-- CUSTOM CSS -->
+    
     <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="shopbag/css/main.css">
     <!--BOOTSTRAP-->
     <!--<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">-->
@@ -51,7 +53,7 @@ if (isset($_GET["code"])) {
                 <li class="slider-section"><a href="#"><img src="images/m3.jpg" alt="Taza ep Goku"></a></li>
                 <li class="slider-section"><a href="#"><img src="images/m6.jpg" alt="Taza ep Goku"></a></li>
             </ul>
-            <a href="shop.php" class="btn slider-btn-main">SHOP NOW!</a>
+    
             <div class="slider-btn slider-btn-right" id="btn-right"><i class="fa fa-arrow-right"></i></div>
             <div class="slider-btn slider-btn-left" id="btn-left"><i class="fa fa-arrow-left"></i></div>
         </header>
@@ -73,7 +75,7 @@ if (isset($_GET["code"])) {
                 </div>
             </div>
 
-            <div class="shop">
+            <div class="shop2">
                 <div class="shop-third">
                     <h2>BEST SELLERS!</h2>
                     <p></p>
@@ -89,7 +91,45 @@ if (isset($_GET["code"])) {
         <section class="products-container">
             <h1>PRODUCTS</h1>
             <hr>
-            <div class="products">
+            <?php
+            $response = json_decode(file_get_contents('http://localhost/MKCCC/shopbag/api/productos/api-productos.php?getAllItems'), true);
+            ?>
+            <div class="articles">
+                <?php
+                if ($response['statuscode'] == 200) {
+                    if ($response['items'] == '') {
+                        $item = $response['item']; ?>
+                        <div class="articulo">
+                            <input type="hidden" id="id" value="<?php echo $item['id'];  ?>">
+                            <div class="imagen"><img onmouseout="this.src='images/<?php echo $item['imagen'] . '.jpg';  ?>'" onmouseover="this.src='images/<?php echo $item['imagen'] . '-2.jpg';  ?>'" src='images/<?php echo $item['imagen'] . '.jpg';  ?>' /></div>
+                            <div class="titulo"><?php echo $item['nombre'];  ?></div>
+                            <div class="precio">$<?php echo $item['precio'];  ?> MXN</div>
+                            <div class="botones">
+                                <button class='btn-add'>Agregar al carrito</button>
+                            </div>
+                        </div>
+            </div>
+            <?php
+                    } else {
+                        foreach ($response['items'] as $item) { ?>
+                <!--include('shopbag/layout/items.php');-->
+                <div class="articulo">
+                    <input type="hidden" id="id" value="<?php echo $item['id'];  ?>">
+                    <div class="imagen"><img onmouseout="this.src='images/<?php echo $item['imagen'] . '.jpg';  ?>'" onmouseover="this.src='images/<?php echo $item['imagen'] . '-2.jpg';  ?>'" src='images/<?php echo $item['imagen'] . '.jpg';  ?>' /></div>
+                    <div class="titulo"><?php echo $item['nombre'];  ?></div>
+                    <div class="precio">$<?php echo $item['precio'];  ?> MXN</div>
+                    <div class="botones">
+                        <button class='btn-add'>Agregar al carrito</button>
+                    </div>
+                </div>
+    <?php
+                        }
+                    }
+                } else {
+                    // mostrar error
+                }
+    ?>
+            <!--<div class="products">
 
                 <div id="product">
                     <img alt="" onmouseout="this.src='images/blu11.png';" onmouseover="this.src='images/blu1-22.png';" src="images/blu11.png" />
@@ -147,7 +187,7 @@ if (isset($_GET["code"])) {
                     <img alt="" onmouseout="this.src='images/bro.png';" onmouseover="this.src='images/bro.png';" src="images/bro.png" />
                 </div>
 
-            </div>
+            </div>-->
 
         </section>
 
@@ -233,5 +273,6 @@ if (isset($_GET["code"])) {
         <?php include 'footer.php'; ?>
     </div>
     <script src="app/main.js"></script>
+    <script src = "js/main.js"></script>
 </body>
 </html>

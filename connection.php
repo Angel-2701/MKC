@@ -1,5 +1,4 @@
 <?php 
-
 class connection{
     //Parameters for db Connection
     private $server = 'localhost';
@@ -29,7 +28,4 @@ class connection{
         return $statement->fetch(PDO::FETCH_ASSOC);
     }
 }
-
-
-
 ?>

@@ -9,8 +9,7 @@ if ($_POST) {
     $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
     $objConn = new connection();
     $sql = "INSERT INTO `users`(nombre,email,password) VALUES ('$name','$email','$password')";
-    $objConn->ejec($sql);
-    
+    $objConn->ejec($sql);  
 }
 ?>
 
